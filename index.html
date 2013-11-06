@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>智德师傅2014生肖运势</title>
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<phonegap></phonegap>
+<link rel="stylesheet" type="text/css" href="Lib/lungo.css">
+<link rel="stylesheet" type="text/css" href="Lib/lungo.icon.css">
+<link rel="stylesheet" type="text/css" href="Lib/lungo.theme.css">
+<link rel="stylesheet" type="text/css" href="Lib/2014.css">
+<script>
+function sxlist(){
+	var sxlists='';
+	for(i=0;i<=11;i++){
+		sxlists+='<li data-view-section="yun_'+(i+1)+'" data-async="Data/sx_'+(i+1)+'.html?sx='+(i+1)+'"><img src="Lib/img/sx'+(i+1)+'.png"></li>';
+	}
+	$$("#layout-art1").html('<ul class="sxpiclist ul">'+sxlists+'</ul>');
+}
+function sxprolist(){
+	var sxpros='';
+	for(i=0;i<=11;i++){
+		sxpros+='<li class="thumb arrow" data-view-section="pro_'+(i+1)+'" data-async="Data/pro_'+(i+1)+'.html"><img src="Lib/pro/'+(i+1)+'-1.jpg" height="50" /><img src="Lib/pro/'+(i+1)+'-2.jpg" height="50" /><div><strong>生肖'+sxArr[i]+'改运组合</strong><small>属'+sxArr[i]+'人在2014（蛇）年的改运组合套装</small></div></li>'
+	}
+	$$("#layout-art2").html('<ul class="proList">'+sxpros+'</ul>');
+}
+function applist(){
+	var apps='';
+	for(i=0;i<=appArr.length-1;i++){
+		appArr[i][2]=="#" ? noo='light' : noo='';
+		apps+='<li class="thumb selectable arrow '+noo+'"><a href="'+appArr[i][2]+'"><img src="'+appArr[i][1]+'" height="50" /></a><div><a href="'+appArr[i][2]+'"><strong>'+appArr[i][0]+'</strong><small>'+appArr[i][3]+'</small></a></div></li>'
+	}
+	$$("#layout-art3").append(apps);
+}
+
+</script>
+</head>
+
+<body id="index">
+<section id="main" data-transition="slide" data-aside="features">
+	<header>
+		<nav> <a href="#" data-view-aside="features" data-icon="cog"></a> </nav>
+		<h1 class="title centered">智德师傅2014生肖运势</h1>
+		<nav class="on-right"><a data-view-section="about" data-async="Data/about.html" data-icon="question-sign"></a></nav>
+	</header>
+	<article id="layout-art1" class="scroll"></article>
+    <article id="layout-art2" class="scroll list indented"></article>
+    <article id="layout-art3" class="scroll list">
+		<ul class="appList">
+			<li class="thumb selectable arrow" data-view-article="layout-art4"><img src="app/bazi/icon.jpg" height="50" /><div><strong>生辰八字算命</strong><small>输入您的生辰八字，即可测出旦夕祸福</small></div></li>
+		</ul>
+	</article>
+    <article id="layout-art4" class="scroll">
+		<div id="tADBar"><img src="Lib/img/AD.jpg"></div>
+        <div class="form">
+			<fieldset>
+			<label>姓名</label>
+            <label><input id="names" type="names" placeholder="匿名"></label>
+			</fieldset>
+			<fieldset>
+				<label>性别</label>
+				<label><input type="radio" name="sex" value="男" id="sex_0" checked>男生</label>
+				<label><input type="radio" name="sex" value="女" id="sex_1">女生</label>
+			</fieldset>
+			<fieldset>
+				<label>历法</label>
+				<label><input type="radio" name="lifa" value="公" id="lifa_0" checked>公历</label>
+				<label><input type="radio" name="lifa" value="农" id="lifa_1">农历</label>
+			</fieldset>
+			<fieldset>
+                <label>生日</label>
+                <input type="text" class="align_right" id="bsday" value="1980-08-06 06:30" />
+				<!--<label>时间</label>
+                <input type="time" class="align_right" id="bstime" value="12:30"/>-->
+				<label class="anchor">提示：选择您的出生时间，精确到小时却可。</label>
+				<button id="suanBtn" class="anchor accept margin-bottom" data-label="点击算命"></button>
+            </fieldset>
+		</div>
+    </article>
+	
+	<footer>
+		<nav id="footer">
+			<a href="#" data-view-article="layout-art1" class="ni1 active">生肖运势</a>
+			<a href="#" data-view-article="layout-art2" class="ni2">马年改运</a>
+			<a href="#" data-view-article="layout-art3" class="ni3">应用中心</a>
+			<a href="#" data-view-article="layout-art4" class="ni4" >在线算命</a>
+		</nav>
+	</footer>
+</section>
+<script src="Lib/quojs/quo.js"></script>
+<script src="Lib/lungo.js"></script>
+<script src="Lib/2014.js"></script>
+<script src="Lib/jquery.js"></script>
+<script src="Lib/date/mobiscroll.core.js"></script>
+<link rel="stylesheet" type="text/css" href="Lib/date/mobiscroll.core.css">
+<script>
+if(localStorage.baziinfo){
+	baziArr=localStorage.baziinfo.split("|");
+	baziArr=baziArr[baziArr.length-1].split(",");
+	$$("#names").val(baziArr[0]);
+	$$("[name=sex][value='"+baziArr[1]+"']").attr("checked",true);
+	$$("[name=lifa][value='"+baziArr[2]+"']").attr("checked",true);
+	$$("#bsday").val(baziArr[3]);
+}
+sxlist();
+sxprolist();
+applist()
+Lungo.init({
+	name: '2014生肖运程',
+	version: '1.0.0',
+	resources:['sys/side_Menu.html'],
+	history: false
+});
+
+$$(".sxpro .buyBtns,.sxpro img").tap(function(){
+	id=$$(this).parent().children("img").attr("src").split("/")[2].replace(".jpg","");
+	window.location="buy.html?id="+id
+})
+//八字选择初始化
+var opt = {}
+opt.datetime = { preset : 'datetime', minDate: new Date(1950,3,10,9,22), maxDate: new Date(2014,7,30,15,44), stepMinute:5};
+$('#bsday').scroller($.extend(opt["datetime"], { theme:'ios', mode:'scroller', display:'bottom', lang:'zh' }));
+//点击测算
+$$("#suanBtn").tap(function(){
+	var names=$$("#names").val();
+	var sex=$$("[name=sex]:checked").val();
+	var lifa=$$("[name=lifa]:checked").val();
+	var bsday=$$("#bsday").val();
+	if(bsday==""){
+		alert("请选择出生日期");
+	}else{
+		curbz=names+','+sex+','+lifa+','+bsday;
+		if(localStorage.baziinfo){
+			var bzArr=localStorage.baziinfo.split("|");
+			if(bzArr.indexOf(curbz)<0){
+				localStorage.baziinfo+="|"+curbz;
+			}
+		}else{
+			localStorage.baziinfo=curbz;
+		}
+		window.location='app_suan.html?names='+names+'&sex='+sex+'&lifa='+lifa+'&bsday='+bsday;
+	}
+})
+Lungo.dom('#main').on('unload', function(event){
+	if($$(".yunBox.show").length){
+		$$.ajax({
+			type: 'GET',
+			url: 'Data/wen.html',
+			dataType: 'html',
+			async: true,
+			success: function(response) {
+				$$(".yunBox.show .zhongyun").append(response).data("addm",true);
+			},
+			error: function(xhr, type) {}
+		});
+	}else if($$("#SuanM.show").length){
+		baziArr=localStorage.baziinfo.split(",");
+		baziArr[0]==""?tits="":tits=baziArr[0]+"的";
+		$$("#SuanM.show h1").html(tits+"八字批命书");
+	}
+});
+//加载远程信息
+$(function(){
+	$.getScript("http://1.2014.sinaapp.com/Lib/config.js?"+new Date().getTime(),function(){});
+})
+</script>
+</body>
+</html>

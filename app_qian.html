@@ -1,0 +1,229 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>观音灵签</title>
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<phonegap></phonegap>
+<link rel="stylesheet" type="text/css" href="Lib/lungo.css">
+<link rel="stylesheet" type="text/css" href="Lib/lungo.icon.css">
+<link rel="stylesheet" type="text/css" href="Lib/lungo.theme.css">
+<style>
+#layout-art1{background:url(app/qian/bg.jpg) right top;}
+#qiantong{width:130px;height:255px;background:url(app/qian/qiantong.png) no-repeat center center;margin:50px auto 10px auto;}
+@-webkit-keyframes flipInX {
+    0% {
+        -webkit-transform: perspective(400px) rotateX(90deg);
+        opacity: 0;
+    }
+    
+    40% {
+        -webkit-transform: perspective(400px) rotateX(-10deg);
+    }
+    
+    70% {
+        -webkit-transform: perspective(400px) rotateX(10deg);
+    }
+    
+    100% {
+        -webkit-transform: perspective(400px) rotateX(0deg);
+        opacity: 1;
+    }
+}
+.flipInX {
+	-webkit-backface-visibility: visible !important;
+	-webkit-animation-name: flipInX;
+	-moz-backface-visibility: visible !important;
+	-moz-animation-name: flipInX;
+	-o-backface-visibility: visible !important;
+	-o-animation-name: flipInX;
+	backface-visibility: visible !important;
+	animation-name: flipInX;
+}
+@-webkit-keyframes tada {
+	0% {-webkit-transform: scale(1);}	
+	10%, 20% {-webkit-transform: scale(0.9) rotate(-3deg);}
+	30%, 50%, 70%, 90% {-webkit-transform: scale(1.1) rotate(3deg);}
+	40%, 60%, 80% {-webkit-transform: scale(1.1) rotate(-3deg);}
+	100% {-webkit-transform: scale(1) rotate(0);}
+}
+.tada {
+	-webkit-animation-name: tada;
+	-moz-animation-name: tada;
+	-o-animation-name: tada;
+	animation-name: tada;
+}
+@-webkit-keyframes shake {
+	0%, 100% {-webkit-transform: translateX(0);}
+	10%, 30%, 50%, 70%, 90% {-webkit-transform: translateX(-10px);}
+	20%, 40%, 60%, 80% {-webkit-transform: translateX(10px);}
+}
+.animated {
+	-webkit-animation-duration: 1s;
+	   -moz-animation-duration: 1s;
+	     -o-animation-duration: 1s;
+	        animation-duration: 1s;
+	-webkit-animation-fill-mode: both;
+	   -moz-animation-fill-mode: both;
+	     -o-animation-fill-mode: both;
+	        animation-fill-mode: both;
+}
+.shake {
+	-webkit-animation-name: shake;
+	-moz-animation-name: shake;
+	-o-animation-name: shake;
+	animation-name: shake;
+}
+.helpa{float:right;background:rgba(102,0,0,0.4); border-radius:5px;padding:5px;color:#FFF; box-shadow:inset 1px 1px 2px rgba(0,0,0,0.3);}
+.shuoming{border-radius:10px;padding:10px;background-color:rgba(0,0,0,0.3);border:2px solid rgba(0,0,0,0.3);color:#FFF;text-shadow:0 0 2px #000;color:#FFF;}
+.sbei{display:block;background:url(app/qian/sign1.gif);width:100px;height:77px;margin:auto;}
+.qiani{color:#F00; font-size:20px;}
+
+#beibox{ text-align:center;display:none;}
+#beiImg{width:100px;height:77px;margin:30px 0;}
+#beiDoc{margin-bottom:15px;}
+#beiDoc b{color:#FF0;}
+#qWen{display:none; text-align:center;}
+#qWen img{margin-bottom:10px;width:200px;height:403px;}
+
+</style>
+<script>
+var qci=1,iscou=false,qiani;
+function getnum(a,b){return parseInt(Math.floor(Math.random()*b+a));}
+function recou(){$$("#qianbox").show();$$("#beibox,#qWen").hide();iscou=false;qci=1;}
+function qian(){
+	if(!iscou){
+		try{navigator.notification.vibrate(500)}catch(e){}
+		$$("#qiantong").attr("class","shake animated");iscou=true;
+		qiani=getnum(0,99);
+		window.setTimeout(function(){
+			$$("#qiantong").removeAttr("class");
+			Lungo.Notification.confirm({
+				icon: 'sbei',
+				title: '恭喜您抽中<span class="qiani">'+(qiani+1)+'</span>签',
+				description: '您还需要投掷三次圣杯了验证本签是否灵验。',
+				accept: {
+					icon: 'checkmark',
+					label: '点击投掷',
+					callback: function(){bei()}
+				},
+				cancel: {
+					icon: 'close',
+					label: '重新求签',
+					callback: function(){recou();}
+				}
+			});
+		},1000);
+	}
+}
+function bei(){
+	try{navigator.notification.vibrate(500)}catch(e){}
+	if(qci>=3){
+		$$("#beibox").hide();
+		getqian(qiani)
+	}else if(iscou){
+		var tishi="";
+		ibei=getnum(1,7)%4;
+		if(ibei==0){ibei=4;
+			tishi="您掷出了笑杯，此签不准。求签前，请心除杂念，观音灵签必需诚心方可求得。详细请右上角的求签说明。<br>";
+			$$("#beiBtn").html("点击重新求签").attr("class","anchor cancel margin-bottom");
+			iscou=false;qci=1;
+		}else{
+			tishi="恭喜：您第<b>"+qci+"</b>次圣杯";qci++;
+			$$("#beiBtn").html("点击再次投掷")
+		}
+		$$("#beiImg").attr("class","tada animated");
+		window.setTimeout(function(){$$("#beiImg").removeAttr("class");},1000)
+		$$("#qianbox").hide();
+		$$("#beibox").show();
+		$$("#beiImg").attr("src","app/qian/sign"+ibei+".gif");
+		$$("#beiDoc").html(tishi);
+	}else{
+		recou();
+	}
+}
+function getqian(i){
+	$$("#qianbox,#beibox").hide();
+	$$("#qWen").show();
+	$$("#qianImg").attr("src","http://www.12ky.com/images/qian/guanying/"+(i+1)+".gif");
+}
+
+</script>
+</head>
+
+<body>
+<section id="main" data-transition="slide" data-aside="features" class="drag">
+	<header data-title="观音灵签">
+		<nav><a href="#" data-view-aside="features" data-icon="cog"></a></nav>
+		<nav class="on-right"><a href="index.html" data-icon="home"></a></nav>
+	</header>
+	<article id="layout-art1" class="scroll indented">
+		<div id="qianbox">
+			<div id="helpa" class="helpa" data-icon="question-sign"> 观音灵签帮助说明</div>
+			<div id="qiantong"></div>
+			<div class="shuoming anchor">温馨提示：点击签筒<span id="yao"></span>求签</div>
+		</div>
+		<div id="beibox"><img id="beiImg" /><div id="beiDoc" class="shuoming"></div><button id="beiBtn" class="anchor accept margin-bottom"></button></div>
+		<div id="qWen"><img id="qianImg" /><br><button id="recouBtn" class="cancel margin-bottom">重新求签</button></div>
+	</article>
+</section>
+<script src="Lib/quojs/quo.js"></script> 
+<script src="Lib/lungo.js"></script>
+<script src="Lib/2014.js"></script>
+<script>
+Lungo.init({
+	name: '观音灵签',
+	version: '1.0.0',
+	resources:['sys/side_Menu.html'],
+	history: false
+});
+var SHAKE_THRESHOLD = 3000;
+var last_update = 0;
+var x = y = z = last_x = last_y = last_z = 0;
+var shake=false,yaotxt="";
+var env = $$.environment();
+
+//摇一摇
+function init() {
+	if (window.DeviceMotionEvent) {
+		shake=true;
+		window.addEventListener('devicemotion', deviceMotionHandler, false);
+		yaotxt="或摇晃手机";
+		$$("#yao").text("或摇晃手机");
+	} else {
+		//alert('not support mobile event');
+	}
+}
+function deviceMotionHandler(eventData) {
+	var acceleration = eventData.accelerationIncludingGravity;
+	var curTime = new Date().getTime();
+	if ((curTime - last_update) > 100) {
+		var diffTime = curTime - last_update;
+		last_update = curTime;
+		x = acceleration.x;
+		y = acceleration.y;
+		z = acceleration.z;
+		var speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
+		if (speed > SHAKE_THRESHOLD) {qian();}
+		last_x = x;
+		last_y = y;
+		last_z = z;
+	}
+}
+init()
+
+$$("#recouBtn").tap(function(){recou();});
+$$("#qiantong").tap(function(){qian();});
+$$("#beibox").tap(function(){bei();});
+$$("#helpa").tap(function(){
+	Lungo.Notification.success(
+		"观音灵签帮助说明",
+		"1. 求签前双手合十，默念[救苦救难观音菩萨]三遍。 <br>2. 默念自己姓名，出生时辰，年龄，地址。 <br>3. 请求指点，如婚姻、事业、财运等。 <br>4. 点上面的签筒"+yaotxt+"开始求签！<br><br>【点击关闭】", 
+		"question-sign",
+		7,
+		function(){}
+	);
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>百灵鸟老黄历</title>
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<link rel="stylesheet" type="text/css" href="Lib/lungo.css">
+<link rel="stylesheet" type="text/css" href="Lib/lungo.icon.css">
+<link rel="stylesheet" type="text/css" href="Lib/lungo.theme.css">
+<script src="Lib/jquery.js"></script>
+<script src="app/huangli/huangli.js"></script>
+<style>
+#layout-art1{ font-size:12px;}
+@-webkit-keyframes flipOut{
+	0%{-webkit-transform:perspective(400px) rotateY(0deg) scale(1);opacity:1;}
+	100%{-webkit-transform:perspective(400px) rotateY(-180deg) scale(.2);opacity:0;}
+}
+@-webkit-keyframes flipIn{
+	0%{-webkit-transform:perspective(400px) rotateY(120deg) scale(.2);opacity:0;}
+	100%{-webkit-transform:perspective(400px) rotateY(0deg) scale(1);}
+}
+@-webkit-keyframes flipR{
+	0%{-webkit-transform:perspective(400px) rotateY(190deg);}
+	100%{-webkit-transform:perspective(400px) rotateY(360deg);}
+}
+@-webkit-keyframes flipL{
+	0%{-webkit-transform:perspective(400px) rotateY(-190deg);}
+	100%{-webkit-transform:perspective(400px) rotateY(-360deg);}
+}
+@-webkit-keyframes flipU{
+	0%{-webkit-transform:perspective(400px) rotateX(190deg);}
+	100%{-webkit-transform:perspective(400px) rotateX(360deg);}
+}
+@-webkit-keyframes flipD{
+	0%{-webkit-transform:perspective(400px) rotateX(-190deg);}
+	100%{-webkit-transform:perspective(400px) rotateX(-360deg);}
+}
+.anmt-flipOut{-webkit-animation-name:flipOut;-webkit-backface-visibility:visible !important;}
+.anmt-flipIn{-webkit-animation-name:flipIn;-webkit-backface-visibility:visible !important;}
+.anmt-flipR{-webkit-animation-name:flipR;-webkit-backface-visibility:visible !important;}
+.anmt-flipL{-webkit-animation-name:flipL;-webkit-backface-visibility:visible !important;}
+.anmt-flipU{-webkit-animation-name:flipU;-webkit-backface-visibility:visible !important;}
+.anmt-flipD{-webkit-animation-name:flipD;-webkit-backface-visibility:visible !important;}
+[class*="anmt"]{-webkit-animation-delay:0s;-webkit-animation-duration:1s;-webkit-animation-fill-mode:both;-webkit-animation-timing-function:ease;}
+
+#layout-art1{background:#fdde8e url(app/huangli/bg.gif);}
+#todayBtn{margin-left:10px;}
+.topBar{background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#a20025), to(#86001f));padding:10px; box-shadow:0 0 5px rgba(0,0,0,0.5);margin-bottom:10px;position:relative;height:24px;line-height:24px;}
+.topBar .txt{font-size:20px; text-align:center;color:#FFF;}
+.topBar .fl{left:5px;top:50%;margin-top:-15px}
+.topBar .fr{right:5px;top:50%;margin-top:-15px;}
+
+[class|=ibtn]{display:inline-block;position:absolute;height:30px;line-height:30px;font-size:16px;color:#FFF; text-shadow:1px 1px 2px rgba(0,0,0,0.3);padding:0 10px;background-color:rgba(73,0,4,.45);border-radius:0px 5px 5px 0px; }
+[class|=ibtn]:before{content:"";display:inline-block;position:absolute;border:solid 15px transparent;}
+.ibtn-pev{border-radius:0px 5px 5px 0px;margin-left:16px;box-shadow:inset -2px 2px 1px rgba(0,0,0,0.03);}
+.ibtn-nxt{border-radius:5px 0px 0px 5px;margin-right:16px;box-shadow:inset 2px 2px 1px rgba(0,0,0,0.03);}
+.ibtn-pev:before{border-right-color:rgba(73,0,4,.45);left:-30px;top:0px;}
+.ibtn-nxt:before{border-left-color:rgba(73,0,4,.45);right:-30px;top:0px;}
+.ibtn-btn{border-radius:5px;}
+
+.cldTit{background-color:rgba(0,0,0,.4);width:95%;margin:10px auto 10px auto;padding:5px 0px; border-radius:10px;box-shadow:0px 0px 8px rgba(0,0,0,0.2); position:relative;}
+#tDates{font-size:16px; text-align:center;color:#FFF;}
+#prevMonth,#nextMonth{position:absolute;top:50%;background-image:url(app/huangli/gt.png);width:20px;height:30px;margin-top:-15px;}
+#prevMonth{left:10px; background-position:left center;}
+#nextMonth{right:10px; background-position:right center;}
+
+.clender{text-align:center;width:95%; margin:auto;}
+#nongliTab{border-radius:10px;overflow:hidden;box-shadow:0px 0px 8px rgba(0,0,0,0.2)}
+#nongliTab thead td{width:14.2857%;height:36px;line-height:36px;background:#FFF;}
+#nongliTab tbody tr td{padding-bottom:3px;}
+#nongliTab td{ text-align:center;}
+#nongliTab td:active{background-color:#C30;}
+#nongliTab thead td:nth-child(1){ border-top-left-radius:10px;}
+#nongliTab thead td:nth-child(7){ border-top-right-radius:10px;}
+#nongliTab tbody tr:last-child td:nth-child(1){ border-bottom-left-radius:10px;}
+#nongliTab tbody tr:last-child td:nth-child(7){ border-bottom-right-radius:10px;}
+
+#info{float:left;position:absolute;width:100%;height:100%;left:0px;top:0px;background:#C30;display:none; text-align:center;}
+.riliCon{background:#FFD;padding-bottom:15px;margin:0px 2px;position:relative;}
+.riliCon .jieri{position:absolute;right:5px;top:5px;}
+.riliCon .jieri span{display:block;line-height:24px;padding:2px 5px; border-radius:8px;background:#C30;margin:2px;color:#FFF;}
+.gongbar{font-size:24px;padding:10px;color:#FFF;}
+.gongri{font-size:120px;}
+.yjCon{line-height:26px;}
+.stit {letter-spacing:5px;}
+.stit span{width:28px;height:28px;line-height:14px;float:left;background:#C30;color:#FFF;padding:3px;margin-right:5px;letter-spacing:0px;}
+#cdrn{background:#C30;}
+#cdrn td{background:#FFF;}
+
+.clender td{background:#FFC;}
+.clender .unday{background:#EEE;}
+.clender .jingri{background:#F60;color:#FFF}
+.clender td .dGong{display:block; font-size:24px;}
+.clender td .dNong{font-size:10px;}
+.clender td.weekend{color:#F00;}
+</style>
+</head>
+</head>
+
+<body>
+<section id="main" data-transition="slide" class="drag">
+	<header>
+		<nav><button id="todayBtn" class="cancel margin-bottom" data-icon="calendar"> 返回今日</button></nav>
+		<h1 class="title centered">百灵鸟老黄历</h1>
+		<nav class="on-right"><a href="index.html" data-icon="home"></a></nav>
+	</header>
+	<article id="layout-art1" class="indented">
+		<div style="clear:both"></div>
+		<div class="cldTit">
+			<span id="prevMonth"></span>
+			<div id="tDates"><span id="gongli"></span></div>
+			<span id="nextMonth"></span>
+		</div>
+		<div id="clenderBox" class="clender">
+			<table id="nongliTab" width="100%" border="0" cellspacing="1" cellpadding="0">
+				<thead>
+				<tr>
+					<td>周日</td>
+					<td>周一</td>
+					<td>周二</td>
+					<td>周三</td>
+					<td>周四</td>
+					<td>周五</td>
+					<td>周六</td>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		<div id="info"></div>
+	</article>
+</section>
+<script src="Lib/quojs/quo.js"></script> 
+<script src="Lib/lungo.js"></script> 
+<script>
+Lungo.init({
+	name: '百灵鸟老黄历',
+	version: '1.0.0',
+	history: false
+});
+
+$(function(){
+	show(tY,tM);
+	$("body").removeAttr("class");
+	$$("#prevMonth").tap(function(){
+		cmon=conty(global.currYear,global.currMonth-1);
+		show(cmon[0],cmon[1]);
+		donghua("#nongliTab","anmt-flipR");
+	});
+	$$("#nextMonth").tap(function(){
+		cmon=conty(global.currYear,global.currMonth+1);
+		show(cmon[0],cmon[1]);
+		donghua("#nongliTab","anmt-flipL");
+	});
+	$$("#todayBtn").tap(function(){
+		show(tY,tM);
+		donghua("#nongliTab tbody td","anmt-flipU");
+	});
+	
+	$("#nongliTab tbody td").click(function(){
+		$("#clenderBox,.cldTit").hide();
+		var date=$(this).attr("data-date");
+		var nongArr=getData(date);
+		nongArr[8].indexOf("|")>=0? yiji=nongArr[8].replace(/\./g,"<br>").replace("宜：","").replace("忌：","").split("|"):yiji=[nongArr[8],nongArr[8]];
+		var jieri=""
+		for(i=0;i<=2;i++){if(nongArr[12][i]!=""){jieri+="<span>"+nongArr[12][i]+"</span>"}}
+		if(jieri!=""){jieri='<div class="jieri">'+jieri+'</div>'}
+		$("#info").show().html('<div class="gongbar">'+nongArr[1]+' '+nongArr[2]+'</div><div class="riliCon">'+jieri+'<div class="gongri">'+nongArr[0]+'</div><table id="cdrn" align="center" width="90%" border="0" cellspacing="1" cellpadding="5"><tr><td width="20%"><strong>宜</strong></td><td colspan="3">'+nongArr[5]+' ['+nongArr[3]+'] [属'+nongArr[4]+']</td><td width="20%"><strong>忌</strong></td></tr><tr><td class="yjCon" rowspan="5">'+yiji[0]+'</td><td>'+nongArr[6][0]+'</td><td>'+nongArr[6][1]+'</td><td>'+nongArr[6][2]+'</td><td class="yjCon" rowspan="5">'+yiji[1]+'</td></tr><tr><td>'+nongArr[7][0]+'</td><td>'+nongArr[7][1]+'</td><td>'+nongArr[7][2]+'</td></tr><tr><td colspan="3">'+nongArr[9]+'</td></tr><tr><td colspan="3" class="stit"><span>彭祖<br />百忌</span>'+nongArr[11].replace(" ","<br />")+'</td></tr><tr><td colspan="3" class="stit"><span>每日<br />胎神</span>'+nongArr[10].replace(" ","<br />")+'</td></tr></table></div>');
+		donghua("#info","anmt-flipIn");
+	});
+	$("#info").click(function(){
+		donghua("#info","anmt-flipOut",function(){$("#info").empty().hide();$("#clenderBox,.cldTit").show();});
+	})
+	$$("#clenderBox").swipeLeft(function(){
+		cmon=conty(global.currYear,global.currMonth+1);
+		show(cmon[0],cmon[1]);
+		donghua("#nongliTab","anmt-flipL");
+	}).swipeRight(function(){
+		cmon=conty(global.currYear,global.currMonth-1);
+		show(cmon[0],cmon[1]);
+		donghua("#nongliTab","anmt-flipR");
+	}).swipeUp(function(){
+		cmon=conty(global.currYear+1,global.currMonth);
+		show(cmon[0],cmon[1]);
+		donghua("#nongliTab","anmt-flipU");
+	}).swipeDown(function(){
+		cmon=conty(global.currYear-1,global.currMonth+1);
+		show(cmon[0],cmon[1]);
+		donghua("#nongliTab","anmt-flipD");
+	});
+})
+function donghua(elm,clas,fun){
+		if(!$(elm).hasClass(clas)){
+		$(elm).addClass(clas);setTimeout(function(){$(elm).removeClass(clas);if(fun!=undefined){fun();}},900);
+		}
+	}
+function show(SY,SM){
+	var cldhtml="",mon=drawCld(SY, SM);
+	$("#gongli").html(mon.gongli+" "+mon.nongli);
+	$("#nongliTab tbody td").removeAttr("class");
+	$.each(mon.date,function(i,val){
+		var fulldt=val[2]+"-"+val[0]
+		$("#nongliTab tbody td:eq("+i+")").addClass(val[3]).attr("data-date",fulldt).html('<div class="dGong">'+val[0]+'</div><div class="dNong">'+val[1]+'</div>');
+	});
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>智德师傅2014生肖运势</title>
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<link rel="stylesheet" type="text/css" href="Lib/lungo.css">
+<link rel="stylesheet" type="text/css" href="Lib/lungo.icon.css">
+<link rel="stylesheet" type="text/css" href="Lib/lungo.theme.css">
+<link rel="stylesheet" type="text/css" href="Lib/2014.css">
+<style>
+.ddbox{border:#FC6 solid 1px;padding:10px;margin:5px 0px; border-radius:10px;color:#666;}
+</style>
+<body>
+<section id="SuanM" class="suanBox" data-transition="slide">
+	<header>
+		<nav><a href="index.html" data-icon="chevron-left"></a></nav>
+		<h1 class="title centered">用户中心</h1>
+	</header>
+	<article id="User-art" class="suanList list scroll">
+		<ul class="yunBox">
+			<li><strong>开运珠宝订单列表</strong><span id="ddliBox" class="text small">您还没有请购开运吉祥物，返回首页请购吧！</span></li>
+			<li><strong>测试命书</strong><span id="mingshu" class="text small">没有测算记录，返回首页测算吧！</span></li>
+		</ul>
+	</article>
+</section>
+<script src="Lib/quojs/quo.js"></script>
+<script src="Lib/lungo.js"></script>
+<script src="Lib/jquery.js"></script>
+<script src="Lib/2014.js"></script>
+<script>
+Lungo.init({
+	name: '百灵鸟微博',
+	version: '1.0.0',
+	history: false
+});
+var tishi=["下单成功成功","服务器繁忙，请稍后再试！","信息填写错误，或格式不正确","访问订单不存在，或已被删除。","支付信息不存在","代表货到付款，无需支付"]
+if(localStorage.ddlist){
+	var ddArr=localStorage.ddlist.split("|");
+	var ddHTML="";
+	for(var i=0;i<=ddArr.length-1;i++){
+		var subdd=ddArr[i].split(",");
+		
+		var pArr=subdd[1].split("^");
+		var proL="";
+		for(var d=0;d<=pArr.length-1;d++){
+			var cPro=pArr[d].split("_");
+			cPro[0]<=29?proL+=gjArr[guaid.indexOf(cPro[0])]+"("+cPro[1]+"个)；":proL+=bjArr[baiid.indexOf(cPro[0])]+"("+cPro[1]+"个)；";
+		}
+		
+		ddHTML+='<div class="ddbox">订单号：<b>'+subdd[0]
+		+'</b><br>请购吉祥物：'+proL
+		+'<br>收件人：'+subdd[2]+'<br>联系电话：p'+subdd[3]
+		+'<br>地址：'+subdd[4]
+		+'<br>请购时间：'+formatDate(subdd[5])+'<span id="chkddBtn" onclick="chkdd(\''+subdd[0]+'\')" class="button small cancel on-right"><abbr>查询</abbr></span></div>';
+	}
+	$$("#ddliBox").html(ddHTML);
+}
+
+if(localStorage.baziinfo){
+	var bzArr=localStorage.baziinfo.split("|");
+	var bzHTML="";
+	for(var i=0;i<=bzArr.length-1;i++){
+		var subbz=bzArr[i].split(",");
+		bzHTML+='<div class="ddbox">姓名：'+subbz[0]+' / '+subbz[1]+' '+subbz[2]+'历s'+subbz[3]+'<a href="app_suan.html?names='+subbz[0]+'&sex='+subbz[1]+'&lifa='+subbz[2]+'&bsday='+subbz[3]+'&bstime='+subbz[4]+'" class="button small red on-right"><abbr>查看</abbr></a></div>';
+	}
+	$$("#mingshu").html(bzHTML);
+};
+
+function chkdd(ddid){
+	$.ajax({
+		dataType:"jsonp",
+		jsonp:"callback",
+		type:'get',
+		async:false,
+		url:'http://www.bln7.com/api.php?g=order&m=goods&a=search&ordersn='+ddid,
+		success:function(res){
+			if(res.status==1){
+				Lungo.Notification.success("订单查询","订单状态："+res.data.order_status+"；<br>付款状态："+res.data.pay_status+"；<br>发货状态："+res.data.shipping_status+"；<br>以上信息仅供参考，请耐心等候。","close",10,function(){});
+			}else{
+				Lungo.Notification.error('查询订单发生错误，错误信息：'+tishi[res.status-1]+" "+res.data,"close",7,function(){});
+			}
+		}
+   });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>在命算命</title>
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<link rel="stylesheet" type="text/css" href="Lib/lungo.css">
+<link rel="stylesheet" type="text/css" href="Lib/lungo.icon.css">
+<link rel="stylesheet" type="text/css" href="Lib/lungo.theme.css">
+<link rel="stylesheet" type="text/css" href="Lib/2014.css">
+<style>
+/*生肖运程*/
+.suanList li>h2{text-align:center;}
+.suanList li>strong{display:block;height:30px;line-height:30px;color:#FFF;background:#c97001 url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAAWCAYAAABdTLWOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAL+SURBVEhL7ZZZSJRRGIbHxhoTTFvIwiBoc7qLQgptoZWCoCxM6qLAgZYrI7qJLsrAIIJIMkijqIsgiqAwhYIuiiAsI8wLg4gE26wgCtrUxp73zJf4z8Ywg3rTCw/fOd92zpz5N99/jaTC4XBgYGCgAnsHvsJv+ACXoczSRk9sLoeN1GHjitgnqLL00REbOGT7SShyvsFGKxlZsfBc+GJ7SSryHkKRlQ6/WDMX8lm0xu0gBZHbD8N7mqyTxSIrsdewL6ALvrsdIMaSfFehAe7BTws7Mb8Je2EPlODKtvaZi2baYDX0utWihF/X3BGGOmE/5KgOXxk8Uk608P+CRih0i2QqGq2CRBvU4yakPKYLGOsSuITViY2HYuh2yXFErAVT4BbKRDRqirSMFbHrlrP+32awOtleaLDYcZecQMQPKy8j0eSd9fMIfx8sgyJ4bb6nsJrhGmwHzIRtiiUScd35k2259ESDj9bPI/xvMbnY8ojH+fZZmf5+bXQ6hCLR+CL+ChZaWXpSE+vnEf5OjG6qwZNiXGNlTsxnQKuF44p4OxRbSXqiQbP18wh/D2YiVg/1LvPpejwJW+AgtMufTORcwfhtufREg8006ncdhwjfHyhXDnY/9FnIxWyYVOS9hFK3UCaiSQDqra9H+HXRT1Ie06OMdboe4dOX0WebOjH/AU9gua0xAXcQljJegV0E0xRLWRTmQT3EPC/x3YA5lrcE6uA2NNlYf/0GOAEXoZayCvAzLoSdoDfVe9fQxFw/oprhFLeJVETyGGt4CzwnxvwZHGAYtNxxMBayXHGUyJ0Peot5birmPfAcdDO5xxpqg93g2SzxqTaMFcn6uNCJNarDUOHT4+Q+6CSboRUewAU4BWdBH8dvrEQ13XAOtkMJ6EacTSiIXQf6Bx/DXTgPp+EY7LAtJRZJeu3VgudDIkptxDtsPCjVQAuEQJsKWNu4omQWOWthF1TCYkjtvU9xNsmlcAZ0DXWC/ipdp5XE86EA9F7fClWwCeZBnrXJQD7fXwwkTM4IqcADAAAAAElFTkSuQmCC") no-repeat 5px center;padding-left:40px; border-radius:3px; margin-bottom:5px; text-shadow:1px 1px 0px rgba(102,51,0,0.5);}
+.suanList .text{line-height:24px;}
+.suanList p strong:first-child{color:#F00;}
+.suanList .zhubao .sxpro{float:right;width:140px;padding:24px 0 0 5px;}
+.suanList .zhubao .sxpro img{width:120px;height:120px;box-shadow:0 0 5px rgba(0,0,0,0.5);}
+.suanList .zhubao .sxpro .button{margin-top:5px;}
+/*八字表格*/
+.baziinfo{font-size:13px;}
+.baziinfo td{border:#FC9 solid 1px;text-align:center; line-height:24px;padding:0px;margin:0px;}
+.baziinfo td.atit{width:18px;}.baziinfo td.atit1{line-height:18px !important;padding:5px;}
+.wxMing{width:220px;}
+.baziinfo .btit{height:30px;line-height:30px;background-color:#FC0; font-size:20px;font-family:"微软雅黑", "黑体";}
+.baziinfo .btxt{font-size:14px;line-height:24px;line-height:24px;font-family:"微软雅黑", "黑体";color:#C30;}
+.baziinfo .ganzi{height:34px; line-height:34px;width:30px;margin:auto;font-size:24px;font-family:"微软雅黑", "黑体";}
+.suanCon,.suanCon dl,.suanCon dd{margin:0px;padding:0px;}
+.suanCon dt{background:url(../img/xtbz_35.jpg) repeat-x;height:47px;line-height:47px;font-size:22px; text-indent:24px;}
+.suanCon dd{padding:10px; text-indent:24px;line-height:24px;background:rgba(255,234,179,0.3);}
+
+.tdayun{margin:10px 0px;border:#F63 solid 1px;}
+.tdayun td,.tliunian td{border:#FC9 solid 1px;text-align:center;cursor:default;line-height:28px;}
+.tliunian tr:hover{background:rgba(255,255,0,0.5);}
+.tdayun tr td:first-child{font-size:12px;line-height:14px;}
+
+.zhTit{color:#F00;padding:8px;}
+.sxProBox span{display:block;width:48%;text-align:center;color:#930;}
+.sxProBox span img{width:100%; max-width:150px; border:#F63 solid 1px; box-shadow:0 0 5px #F30; border-radius:10px;}
+</style>
+<body>
+<section id="SuanM" class="suanBox" data-transition="slide">
+	<header>
+		<nav><a href="index.html" data-icon="chevron-left"></a></nav>
+		<h1 class="title centered" onClick="window.location.reload();"></h1>
+	</header>
+	<article id="Suan-art" class="suanList list scroll"><li>系统正在初始化...</li></article>
+</section>
+<script src="Lib/quojs/quo.js"></script>
+<script src="Lib/lungo.js"></script>
+<script src="Lib/jquery.js"></script>
+<script src="Lib/2014.js"></script>
+<script>
+var zyun=[
+["冲太岁即岁破-凶","财生官-吉","灾煞-凶","沐浴桃花-吉","走财运-吉","将星被冲小人多-凶","三合龙化冲太岁还旺财","奇龙化相","六合牛挡在化灾煞还旺人缘化小人","雄牛破灾","未解决的灾煞化小人"],
+["害太岁-凶","天乙贵人-吉","岁煞-凶","走印运-吉","龙德贵人旺财运-吉","贵人出小人少-吉","用三合蛇化害太岁还旺财","三合封岁","岁煞用太乙贵人还催官","太乙斗煞","未解决的岁煞问题"],
+["天德合贵人-吉","干禄将星出现-吉","甲克寅内藏干戊-凶","三合太岁-吉","寅木生午火耗财-凶","小人多-凶","化甲克寅中藏戌还旺财","巨库立岁","用三合马化小人财凶还旺运","天马拜将","化解小人财凶问题"],
+["破太岁-凶","走帝旺运-吉","羊刃出-凶","遇到天禧星-吉","卯中乙得岁干助-吉","天禧出小人少-吉","甲合走午中己护卯乙还旺财","天赦六甲","食神破刃化羊刃还旺财","食神破刃","化解未解决的羊刃"],
+["午火生辰土-吉","金舆贵人-吉","灾煞-凶","寡宿-凶","空亡正犯天中煞-凶","小人少-吉","化空亡天中煞还旺运转运","飞马追星","化灾煞和寡宿星","龙腾凤鸣","化灾煞寡宿星"],
+["亡神出-凶","文昌贵人助-吉","割角杀-凶","文昌三合贵人帮-吉","贵人多出相助财-吉","三会太岁贵人助-吉","用三会局化割角杀还旺财","府羊同宫","百福化亡神福多催官","百福纳-吉","化未解决亡神"],
+["本命年-凶","将星出现-吉","自刑-凶","红艳出-吉","木火通明财-吉","将星出小人少-吉","龙池凤阁化太岁护姻缘","天机双贵","用金耗泄甲午化自刑还旺财","八方财胜","化自刑"],
+["藏干克岁-凶","天乙出-吉","午火生未土三会-吉","六合太岁-吉","走墓运败财-凶","因贵人小人少","化未乙克午己庚合乙还旺财","天庚归禄","化墓运破财还旺运转运","腾蛇旺财","化解未解决的破财"],
+["天克地克-凶","走官运","灾煞-凶","报喜星出-吉","驿马逢绝地破财-凶","走官运小人少-吉","化天克地克和灾煞还旺运转运","双子通运","九地金马化驿马保财运还催官","九地金马","保财运"],
+["六厄运-凶","六厄官灾-凶","走胎字运-吉","正桃花-吉","太岁大耗酉金财-凶","小人少","化六厄丁壬合还旺运转运","壬福化禄","五行土通关化财凶还旺运","土载多福","化解未解决的破财"],
+["三合太岁-吉","将星国印贵人-吉","华盖-凶","三合岁-吉","白虎破财-凶","将星出小人少-吉","火克白虎生戌土旺财 还旺运","九转明灯","化华盖保寿运还催官","明禄返贵","化解未处理的寿运"],
+["劫煞出-凶","水火克-凶","长生运-吉","亥中藏甲相助-吉","财运暗藏贵人 -吉","贵人出小人少-吉","六合与太岁三合化劫还旺运","虎啸生福","化火水用木通关保官还旺财","天木司禄","化水火局的官运"],
+]
+var token="6992947e3cc66da63c89107ee3e591130f389bfd";
+Lungo.init({
+	name: '八字算命',
+	version: '1.0.0',
+	history: false
+});
+var getbsd=new Date(decodeURIComponent(GET("bsday").replace(/-/g,"/")));
+bsday=[getbsd.getFullYear(),getbsd.getMonth()+1,getbsd.getDate(),getbsd.getHours(),getbsd.getSeconds()];
+var names=decodeURIComponent(GET("names"));
+var sex=GET("sex");
+var lifa=GET("lifa");
+
+if(bsday.length!=5){
+	$$("h1.title").text("资料有误");
+	$$("#Suan-art").html('<li>您的生日格式不正确，请返回重新输入。</li><li><a href="index.html" class="cancel button small">返回</a></li>');
+}else{
+	$$(".sxpro .buyBtns,.sxpro img").tap(function(){
+		id=$$(this).parent().children("img").attr("src").split("/")[2].replace(".jpg","");
+		window.location="buy.html?id="+id
+	})
+	names==""?tits="":tits=names+"的"
+	$$("h1.title").text(tits+"八字批命书");
+	var mdata="lifa="+lifa+"&sex="+sex+"&nian="+bsday[0]+"&yue="+bsday[1]+"&ri="+bsday[2]+"&shi="+bsday[3]+"&get=all";
+	$.ajax({
+		type:"GET",
+		url:"http://www.bln7.com/suan/bazi.php",
+		data:mdata+"&token="+token,
+		contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+		dataType:"jsonp",
+		beforeSend:function(){$("#Suan-art").html("<li>系统正在测算，请稍后...</li>");},
+		error: function(XmlHttpRequest,textStatus, errorThrown){$("#Suan-art").html('<li>读取数据出错，请检查您输入的数据是否正确，返回重新再试。</li><li><a href="index.html" class="cancel button small">返回</a></li>');},
+		success: function(sdat){
+			var s=sdat.bazi,ln=sdat.liunian,dyHTML="",lyHTML="";
+			var sHTML='<li><table class="baziinfo" width="100%" border="0" cellspacing="1" cellpadding="0"><tr><td class="atit atit1">出生时间</td><td valign="top"><div class="btit">&nbsp;</div><div class="btxt">公历</div><div class="btxt">农历</div></td><td valign="top"><div class="btit">年</div><div class="btxt">'+s[0][0][0]+'年</div><div class="btxt">'+s[0][1][0]+'</div></td><td valign="top"><div class="btit">月</div><div class="btxt">'+s[0][0][1]+'月</div><div class="btxt">'+s[0][1][1]+'</div></td><td valign="top"><div class="btit">日</div><div class="btxt">'+s[0][0][2]+'日</div><div class="btxt">'+s[0][1][2]+'</div></td><td valign="top"><div class="btit">时</div><div class="btxt">'+s[0][0][3]+'时</div><div class="btxt">'+s[0][1][3]+'</div></td></tr><tr><td colspan="2" class="atit">八字</td><td><div class="ganzi">'+s[2][0].substr(0,1)+'</div><div class="ganzi">'+s[2][0].substr(1,1)+'</div></td><td><div class="ganzi">'+s[2][1].substr(0,1)+'</div><div class="ganzi">'+s[2][1].substr(1,1)+'</div></td><td><div class="ganzi">'+s[2][2].substr(0,1)+'</div><div class="ganzi">'+s[2][2].substr(1,1)+'</div></td><td><div class="ganzi">'+s[2][3].substr(0,1)+'</div><div class="ganzi">'+s[2][3].substr(1,1)+'</div></td></tr><tr><td colspan="2" class="atit">藏干</td><td>'+s[3][0]+'</td><td>'+s[3][1]+'</td><td>'+s[3][2]+'</td><td>'+s[3][3]+'</td></tr><tr><td colspan="2" class="atit">十神</td><td>'+s[1][0][1]+'</td><td>'+s[1][1][1]+'</td><td>'+s[1][2][1]+'</td><td>'+s[1][3][1]+'</td></tr><tr><td colspan="2" class="atit">纳音</td><td>'+s[5][0]+'</td><td>'+s[5][1]+'</td><td>'+s[5][2]+'</td><td>'+s[5][3]+'</td></tr><tr><td colspan="2" class="atit">地势</td><td>'+s[4][0]+'</td><td>'+s[4][1]+'</td><td>'+s[4][2]+'</td><td>'+s[4][3]+'</td></tr></table></li>';
+			
+			//算大运
+			$.each(sdat.dayun,function(i,aitm){
+				i==1?tit="大运":tit="&nbsp;";
+				dyHTML+='<tr><td>'+tit+'</td>';
+				$.each(aitm,function(b,bitm){
+					dyHTML+='<td>'+bitm+'</td>'
+				});
+				dyHTML+='</tr>';
+			});
+			sHTML+='<li><strong>排大运</strong><table class="tdayun" width="100%" border="0" cellspacing="1" cellpadding="0">'+dyHTML+'</table></li>';
+			//算流年
+			for(var a=0;a<=10;a++){
+				var tit="";
+				if(a==0){tit="始";}else if(a==10){tit="止";}else{tit=a;}
+				lyHTML+='<tr><td>'+tit+'</td>';
+				for(var b=0;b<=7;b++){
+					var lntxt=ln[b][a];
+					lyHTML+='<td>'+lntxt+'</td>'
+				}
+				lyHTML+='</tr>';
+			}
+			sHTML+='<li><strong>排流年</strong><table class="tliunian" width="100%" border="0" cellspacing="1" cellpadding="0">'+lyHTML+'</table></li>';
+			//2014吉祥物
+			var mSX=s[0][3].substr(1,1);
+			sxid=sxArr.indexOf(mSX);
+			sHTML+='<li><strong>生肖'+sxArr[sxid]+'改运组合</strong><span class="text small">福【灾难官司是非】方面：'+zyun[sxid][0]
+			+'<br>禄【升职俸禄高升】方面：'+zyun[sxid][1]
+			+'<br>寿【健康疾病长寿】方面：'+zyun[sxid][2]
+			+'<br>情【桃花外遇婚姻】方面：'+zyun[sxid][3]
+			+'<br>财【旺财破财失财】方面：'+zyun[sxid][4]
+			+'<br>缘【小人贵人人缘】方面：'+zyun[sxid][5]
+			+'<p>建议佩带和摆放由香港七星堂创始人，著名命理风水大师智师傅亲自设计，并经过正规周易开光的【'+gjArr[sxid]+'】和【'+bjArr[sxid]+'】，以'+zyun[sxid][10]+'，趋吉避凶，消灾化煞。</p><br><div class="sxProBox" data-view-section="pro_'+(sxid+1)+'" data-async="Data/pro_'+(sxid+1)+'.html"><span class="fl"><img src="Lib/pro/'+(sxid+1)+'-1.jpg" />【'+zyun[sxid][7]+'】<br>化煞原理：'+zyun[sxid][6]+'</span><span class="fr"><img src="Lib/pro/'+(sxid+1)+'-2.jpg" />【'+zyun[sxid][9]+'】<br>化煞原理：'+zyun[sxid][8]+'</span><div class="cl"></div></div></span></li>';
+			//测算内容
+			sHTML+='<li><strong>三命通会</strong><span class="text small">'+sdat.sanming+'</span></li><li><strong>穷通宝鉴</strong><span class="text small">'+sdat.qiongtong+'</span></li><li><strong>十神论断</strong><span class="text small">'+sdat.dinwei+'</span></li><li><strong>生肖个性</strong><span class="text small">'+sdat.gexing+'</span></li><li><strong>日元心性</strong><span class="text small">'+sdat.riyuan+'</span></li><li><strong>属性五行</strong><span class="text small">五行个数：'+sdat.wuxing[0]+'<br>'+sdat.wuxing[1]+'<br>'+sdat.wuxing[2]+'<br>'+sdat.wuxing[3]+'<br>'+sdat.wuxing[4]+'</span></li><li><strong>生肖个性</strong><span class="text small">'+sdat.gexing+'</span></li><li><strong>生肖个性</strong><span class="text small">'+sdat.gexing+'</span></li><li><strong>适从事的职业</strong><span class="text small">'+sdat.ziye+'</span></li><li><strong>月日时论命</strong><span class="text small">'+sdat.yuerishi+'</span></li>';
+			$("#Suan-art").html(sHTML);
+		}
+	})
+}
+</script>
+</body>
+</html>

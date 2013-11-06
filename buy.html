@@ -1,0 +1,237 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>请购吉祥物</title>
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<link rel="stylesheet" type="text/css" href="Lib/lungo.css">
+<link rel="stylesheet" type="text/css" href="Lib/lungo.icon.css">
+<link rel="stylesheet" type="text/css" href="Lib/lungo.theme.css">
+<style>
+.cl{clear:both;}
+#buyBox{font-size:14px;}
+.proBox{width:150px;margin:auto;background:#FC0; border:#CCC solid 3px; border-radius:10px; overflow:hidden;}
+.buy{border-color:#F30; box-shadow:0 0 5px #F60;position:relative;}
+.buy:before{width:80px;height:14px;line-height:14px;padding:8px;background:rgba(0,100,0,0.8) url(Lib/img/check.gif) no-repeat 8px center;position:absolute;left:5px;top:5px;text-align:center;border-radius:24px;color:#FFF; font-weight:bold; text-align:center;padding-left:20px; font-size:16px; text-shadow:1px 1px 0px rgba(0,51,0,0.7); box-shadow:1px 1px 2px rgba(0,255,0,0.5);}
+#gua.buy:before{content:"请购挂件";}
+#bai.buy:before{content:"请购摆件";}
+.proWarp{height:280px;padding-left:0 !important;padding-right:0 !important;}
+.proBox strong{display:block;height:56px;line-height:28px;text-align:center;color:#630;}
+.proBox strong b{color:#C30; font-weight:bold;}
+.proWarp>div{width:50%;float:left;}
+.notes{background:#FFC !important; padding:5px;color:#D30;line-height:22px !important; text-shadow:1px 1px 1px #FC6;}
+
+.buyform>tbody>tr>td{padding:7px 5px;}
+#jia,#jian{padding:3px 3px 0px 3px;color:#C30;}
+input,textarea{border:#DDD solid 1px;width:90%;}
+input{height:24px;line-height:24px;}
+.shu .icon{position:relative !important;float:left;}
+.plus-sign{right:50px !important;}
+#jiage{font-size:20px; color:#F30; font-weight:bold; display:inline-block;}
+#buyBtn{float:left;padding:4px 10px;background:#F30;color:#FFF;}
+</style>
+</head>
+
+<body>
+<section id="main" data-transition="slide" data-aside="features">
+	<header>
+		<nav><a href="#" data-view-aside="features" data-icon="cog"></a></nav>
+		<h1 id="buyTit" class="title centered"></h1>
+		<nav class="on-right"><a href="index.html" data-icon="home"></a></nav>
+	</header>
+	<article id="buyBox" class="scroll list">
+		<ul>
+		<li class="proWarp">
+			<div>
+				<div id="gua" class="proBox">
+					<img src="">
+					<div class="button anchor">点击请购</div>
+					<strong></strong>
+				</div>
+			</div>
+			<div>
+				<div id="bai" class="proBox">
+					<img src="">
+					<div class="button anchor">点击请购</div>
+					<strong></strong>
+				</div>
+			</div>
+		</li>
+		<li class="notes" data-icon="heart"> 温馨提示：挂件与摆件双重功效，开运效果更加明显，建议请购全套。</li>
+		<li id="nextStep" style="display:none;"><div class="button anchor">下一步：填写收货人信息</div></li>
+		<li id="BuyiBox" style="display:none;">
+			<table class="buyform" width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="80">请 购 数 量</td>
+					<td>
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td><input id="num" type="number" value="1" style="width:40px !important; text-align:center;" onChange="jiage()"></td>
+								<td width="20" id="danwei">&nbsp;</td>
+								<td width="10">&nbsp;</td>
+								<td id="jia"><span data-icon="plus"></span></td>
+								<td width="10">&nbsp;</td>
+								<td id="jian"><span data-icon="minus"></span></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>订 单 总 价</td>
+					<td><strong id="jiage" style="float:left;"></strong> <span style="float:left; line-height:28px;">&nbsp;&nbsp;元</span></td>
+				</tr>
+				<tr>
+					<td>收件人姓名</td>
+					<td><input id="names" type="text" placeholder="匿名"></td>
+				</tr>
+				<tr>
+					<td>收件人电话</td>
+					<td><input id="tel" type="tel"></td>
+				</tr>
+				<tr>
+					<td>收件人地址</td>
+					<td><textarea id="addr" cols="45" rows="2"></textarea></td>
+				</tr>
+				<tr>
+					<td>备 注 信 息</td>
+					<td><input id="note" type="text"></td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td><div id="buyBtn" data-icon="shopping-cart" data-label="立即请购"></div></td>
+				</tr>
+			</table>
+		</li>
+		</ul>
+	</article>
+</section>
+<script src="Lib/quojs/quo.js"></script>
+<script src="Lib/lungo.js"></script>
+<script src="Lib/jquery.js"></script>
+<script src="Lib/2014.js"></script>
+<script>
+
+Lungo.init({
+	name: '2014生肖运程',
+	version: '1.0.0',
+	resources:['sys/side_Menu.html'],
+	history: false
+});
+
+var idArr=GET("id").split("-");
+var sxi=idArr[0]-1
+var pid="";//产品ID
+function jiage(){
+	//$$("#gua").hasClass("buy")?bjia=jiaArr[0]:bjia=0;
+	//$$("#bai").hasClass("buy")?gjia=jiaArr[1]:gjia=0;
+	if($$("#gua").hasClass("buy")){
+		bjia=jiaArr[0];
+		$$("#gua .button").text("已加入购物车").addClass("cancel");
+	}else{
+		bjia=0;
+		$$("#gua .button").text("点击请购").removeClass("cancel");
+	}
+	if($$("#bai").hasClass("buy")){
+		gjia=jiaArr[1];
+		$$("#bai .button").text("已加入购物车").addClass("cancel");
+	}else{
+		gjia=0;
+		$$("#bai .button").text("点击请购").removeClass("cancel");
+	}
+	if(bjia&&!gjia){dw="枚";}else if(!bjia&&gjia){dw="尊";}else{dw="套";}
+	var num=$$("#num").val();
+	$$("#jiage").text((bjia+gjia)*num);
+	$$("#danwei").html("&nbsp;"+dw);
+}
+
+var phone=env.os.name;
+//系统兼容
+if(env.os.name=="Android"){
+	var sedd="点击上方设置（齿轮）图标";
+	$("#nextStep").show();
+	$$("#nextStep").tap(function(){
+		$("#nextStep,.proWarp,.notes").hide();
+		$("#BuyiBox").show();
+	})
+}else{
+	var sedd="手指在屏幕上向右滑动";
+	$("#BuyiBox").show();
+}
+$$("#buyTit").html("请购属"+sxArr[sxi]+"人开运组合");
+$$("#gua img").attr("src","Lib/pro/"+idArr[0]+"-1.jpg");
+$$("#bai img").attr("src","Lib/pro/"+idArr[0]+"-2.jpg");
+$$("#gua strong").html("开运挂件："+gjArr[sxi]+"<br>全国统一价：<b>"+jiaArr[0]+"</b>元");
+$$("#bai strong").html("开运摆件："+bjArr[sxi]+"<br>全国统一价：<b>"+jiaArr[1]+"</b>元");
+idArr[1]==1?$$("#gua").addClass("buy"):$$("#bai").addClass("buy");
+jiage();//统计价格
+$$("#bai,#gua").tap(function(){
+	$$(this).toggleClass("buy");
+	jiage();//统计价格
+});
+
+$$("#jia,#jian").tap(function(){
+	if($$(this).attr("id")=="jia"){
+		var num=$$("#num").val();
+		num=parseInt(num)+1;
+		$$("#num").val(num+"");
+	}else{
+		var num=parseInt($$("#num").val());
+		num-1<=0?num==1:num--;
+		$$("#num").val(num+"");
+	}
+	jiage();//统计价格
+});
+
+if(localStorage.ddInfo){
+	ddArr=localStorage.ddInfo.split(",");
+	$$("#names").val(ddArr[0]);
+	$$("#tel").val(ddArr[1]);
+	$$("#addr").val(ddArr[2]);
+	$$("#note").val(ddArr[3]);
+}
+
+//订购
+$$("#buyBtn").tap(function(){
+	var jiage=$$("#jiage").text();
+	var names=$$("#names").val();
+	var tel=$$("#tel").val();
+	var addr=$$("#addr").val();
+	var note=$$("#note").val();
+	var num=$$("#num").val();
+	if(jiage<=0){
+		Lungo.Notification.html('<h3>请选择您要请购的吉祥物</h3>', "关闭");
+	}else if(names==""|tel==""|addr==""){
+		Lungo.Notification.html('<h3>收件人信息需要填写完整</h3>', "关闭");
+	}else{
+		localStorage.ddInfo=[names,tel,addr,note];
+		var ginfo={g:'order',a:'add',m:'goods',source:'2014'+phone};
+		cgid=$$("#gua").hasClass("buy")?guaid[sxi]+"_"+num:"";
+		cbid=$$("#bai").hasClass("buy")?baiid[sxi]+"_"+num:"";
+		cgid!=""&&cbid!=""?fgf="^":fgf="";
+		var pid=cgid+fgf+cbid;
+		ginfo.goods=pid;
+		ginfo.consign=encodeURIComponent('consignee='+names+'^mobile='+tel+'^address='+addr);
+		ginfo.order_note=note;
+		$.ajax({
+			dataType:"jsonp",
+			jsonp:"callback",
+			type:'get',
+			async:false,
+			url:'http://www.bln7.com/api.php',
+			data:ginfo,
+			success:function(res){
+				if(res.status==1){
+					Lungo.Notification.success("恭喜！下单成功","您的订单号是："+res.data+"<br>"+sedd+"，在个人中心里可以查找到订单号。","关闭",10,function(){});
+					localStorage.ddlist?fgf=localStorage.ddlist+"|":fgf="";
+					localStorage.ddlist=fgf+res.data+","+pid+","+names+","+tel+","+addr+","+new Date().getTime();
+				}else{
+					Lungo.Notification.error('订单发生错误，错误信息：'+res.data,"关闭",7,function(){});
+				}
+			}
+	   });
+	}
+})
+
+</script>
+</body>
+</html>
