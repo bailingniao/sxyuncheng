@@ -10,7 +10,12 @@ var appArr=[
 	["百灵鸟黄历","app/huangli/icon.jpg","app_huangli.html","历灵鸟老黄历，黄道吉日，婚、丧、嫁、娶必备宝典！"],
 	["观音灵签","app/qian/icon.jpg","app_qian.html","观音灵签100签，按吉凶可分为三种：上签二十二支、中签六十支、下签十八支。观音灵签每支签都有其特殊的意义。"]
 ];
-if(env.os.name=="Android"){$$('[data-view-aside="features"]').attr("href","user.html");}
+if(env.isMobile==true){
+	var phoneName=env.os.name;
+	if(phoneName=="Android"){$$('[data-view-aside="features"]').attr("href","user.html");}
+}else{
+	var phoneName="not_phone";
+}
 $$("#vupload").tap(function(){Lungo.Notification.success("目前最新版本，无需更新。","关闭",7,function(){});});
 
 //indexOf数组的扩展

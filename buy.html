@@ -144,9 +144,8 @@ function jiage(){
 	$$("#danwei").html("&nbsp;"+dw);
 }
 
-var phone=env.os.name;
 //系统兼容
-if(env.os.name=="Android"){
+if(phoneName=="Android"){
 	var sedd="点击上方设置（齿轮）图标";
 	$("#nextStep").show();
 	$$("#nextStep").tap(function(){
@@ -204,7 +203,7 @@ $$("#buyBtn").tap(function(){
 		Lungo.Notification.html('<h3>收件人信息需要填写完整</h3>', "关闭");
 	}else{
 		localStorage.ddInfo=[names,tel,addr,note];
-		var ginfo={g:'order',a:'add',m:'goods',source:'2014'+phone};
+		var ginfo={g:'order',a:'add',m:'goods',source:'2014'+phoneName};
 		cgid=$$("#gua").hasClass("buy")?guaid[sxi]+"_"+num:"";
 		cbid=$$("#bai").hasClass("buy")?baiid[sxi]+"_"+num:"";
 		cgid!=""&&cbid!=""?fgf="^":fgf="";

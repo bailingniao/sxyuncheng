@@ -30,7 +30,7 @@ function applist(){
 		appArr[i][2]=="#" ? noo='light' : noo='';
 		apps+='<li class="thumb selectable arrow '+noo+'"><a href="'+appArr[i][2]+'"><img src="'+appArr[i][1]+'" height="50" /></a><div><a href="'+appArr[i][2]+'"><strong>'+appArr[i][0]+'</strong><small>'+appArr[i][3]+'</small></a></div></li>'
 	}
-	$$("#layout-art3").append(apps);
+	$$("#layout-art3 ul").append(apps);
 }
 
 </script>
@@ -47,11 +47,13 @@ function applist(){
     <article id="layout-art2" class="scroll list indented"></article>
     <article id="layout-art3" class="scroll list">
 		<ul class="appList">
-			<li class="thumb selectable arrow" data-view-article="layout-art4"><img src="app/bazi/icon.jpg" height="50" /><div><strong>生辰八字算命</strong><small>输入您的生辰八字，即可测出旦夕祸福</small></div></li>
+			<li class="thumb selectable arrow" data-view-article="layout-art4">
+				<img src="app/bazi/icon.jpg" height="50" /><div><strong>生辰八字算命</strong><small>输入您的生辰八字，即可测出旦夕祸福</small></div>
+			</li>
 		</ul>
 	</article>
     <article id="layout-art4" class="scroll">
-		<div id="tADBar"><img src="Lib/img/AD.jpg"></div>
+		<div id="tADBar"><a data-view-section="about" data-async="Data/about.html"><img src="Lib/img/AD.jpg"></a></div>
         <div class="form">
 			<fieldset>
 			<label>姓名</label>
@@ -142,6 +144,8 @@ $$("#suanBtn").tap(function(){
 	}
 })
 Lungo.dom('#main').on('unload', function(event){
+	$(".zhongyun,.zhubao").prepend('<div id="tADBar"><a data-view-section="about" data-async="Data/about.html"><img src="Lib/img/AD.jpg"></a></div>');
+	$(".zhongyun li:eq(0)").append('<a data-view-article="layout-art2" class="button small cancel"><abbr>点击查看开运珠宝&gt;&gt;</abbr></a>')
 	if($$(".yunBox.show").length){
 		$$.ajax({
 			type: 'GET',
@@ -161,7 +165,7 @@ Lungo.dom('#main').on('unload', function(event){
 });
 //加载远程信息
 $(function(){
-	$.getScript("http://1.2014.sinaapp.com/Lib/config.js?"+new Date().getTime(),function(){});
+	$.getScript("http://www.12ky.com/WebApp/cApp/2014/phone/kv.js?"+new Date().getTime(),function(){});
 })
 </script>
 </body>

@@ -1,4 +1,7 @@
 #index > section > article{background:url(img/bg.jpg) no-repeat center center; background-size:cover;}
+.imgs{overflow:hidden;}
+.imgs img{width:100%;}
+
 
 #tADBar img{width:100%; max-width:640px;}
 .fl{float:left;}.fr{float:right;}.cl{clear:both;}
@@ -19,7 +22,7 @@
 
 /*生肖运程*/
 .yunBox li>h2{text-align:center;}
-.yunBox li>strong{display:block;height:30px;line-height:30px;color:#FFF;background:#c97001 url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAAWCAYAAABdTLWOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAL+SURBVEhL7ZZZSJRRGIbHxhoTTFvIwiBoc7qLQgptoZWCoCxM6qLAgZYrI7qJLsrAIIJIMkijqIsgiqAwhYIuiiAsI8wLg4gE26wgCtrUxp73zJf4z8Ywg3rTCw/fOd92zpz5N99/jaTC4XBgYGCgAnsHvsJv+ACXoczSRk9sLoeN1GHjitgnqLL00REbOGT7SShyvsFGKxlZsfBc+GJ7SSryHkKRlQ6/WDMX8lm0xu0gBZHbD8N7mqyTxSIrsdewL6ALvrsdIMaSfFehAe7BTws7Mb8Je2EPlODKtvaZi2baYDX0utWihF/X3BGGOmE/5KgOXxk8Uk608P+CRih0i2QqGq2CRBvU4yakPKYLGOsSuITViY2HYuh2yXFErAVT4BbKRDRqirSMFbHrlrP+32awOtleaLDYcZecQMQPKy8j0eSd9fMIfx8sgyJ4bb6nsJrhGmwHzIRtiiUScd35k2259ESDj9bPI/xvMbnY8ojH+fZZmf5+bXQ6hCLR+CL+ChZaWXpSE+vnEf5OjG6qwZNiXGNlTsxnQKuF44p4OxRbSXqiQbP18wh/D2YiVg/1LvPpejwJW+AgtMufTORcwfhtufREg8006ncdhwjfHyhXDnY/9FnIxWyYVOS9hFK3UCaiSQDqra9H+HXRT1Ie06OMdboe4dOX0WebOjH/AU9gua0xAXcQljJegV0E0xRLWRTmQT3EPC/x3YA5lrcE6uA2NNlYf/0GOAEXoZayCvAzLoSdoDfVe9fQxFw/oprhFLeJVETyGGt4CzwnxvwZHGAYtNxxMBayXHGUyJ0Peot5birmPfAcdDO5xxpqg93g2SzxqTaMFcn6uNCJNarDUOHT4+Q+6CSboRUewAU4BWdBH8dvrEQ13XAOtkMJ6EacTSiIXQf6Bx/DXTgPp+EY7LAtJRZJeu3VgudDIkptxDtsPCjVQAuEQJsKWNu4omQWOWthF1TCYkjtvU9xNsmlcAZ0DXWC/ipdp5XE86EA9F7fClWwCeZBnrXJQD7fXwwkTM4IqcADAAAAAElFTkSuQmCC") no-repeat 5px center;padding-left:40px; border-radius:3px; margin-bottom:5px; text-shadow:1px 1px 0px rgba(102,51,0,0.5);}
+.yunBox li>strong{display:block;height:30px;line-height:30px;color:#FFF;background:#c97001 url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAAWCAYAAABdTLWOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAL+SURBVEhL7ZZZSJRRGIbHxhoTTFvIwiBoc7qLQgptoZWCoCxM6qLAgZYrI7qJLsrAIIJIMkijqIsgiqAwhYIuiiAsI8wLg4gE26wgCtrUxp73zJf4z8Ywg3rTCw/fOd92zpz5N99/jaTC4XBgYGCgAnsHvsJv+ACXoczSRk9sLoeN1GHjitgnqLL00REbOGT7SShyvsFGKxlZsfBc+GJ7SSryHkKRlQ6/WDMX8lm0xu0gBZHbD8N7mqyTxSIrsdewL6ALvrsdIMaSfFehAe7BTws7Mb8Je2EPlODKtvaZi2baYDX0utWihF/X3BGGOmE/5KgOXxk8Uk608P+CRih0i2QqGq2CRBvU4yakPKYLGOsSuITViY2HYuh2yXFErAVT4BbKRDRqirSMFbHrlrP+32awOtleaLDYcZecQMQPKy8j0eSd9fMIfx8sgyJ4bb6nsJrhGmwHzIRtiiUScd35k2259ESDj9bPI/xvMbnY8ojH+fZZmf5+bXQ6hCLR+CL+ChZaWXpSE+vnEf5OjG6qwZNiXGNlTsxnQKuF44p4OxRbSXqiQbP18wh/D2YiVg/1LvPpejwJW+AgtMufTORcwfhtufREg8006ncdhwjfHyhXDnY/9FnIxWyYVOS9hFK3UCaiSQDqra9H+HXRT1Ie06OMdboe4dOX0WebOjH/AU9gua0xAXcQljJegV0E0xRLWRTmQT3EPC/x3YA5lrcE6uA2NNlYf/0GOAEXoZayCvAzLoSdoDfVe9fQxFw/oprhFLeJVETyGGt4CzwnxvwZHGAYtNxxMBayXHGUyJ0Peot5birmPfAcdDO5xxpqg93g2SzxqTaMFcn6uNCJNarDUOHT4+Q+6CSboRUewAU4BWdBH8dvrEQ13XAOtkMJ6EacTSiIXQf6Bx/DXTgPp+EY7LAtJRZJeu3VgudDIkptxDtsPCjVQAuEQJsKWNu4omQWOWthF1TCYkjtvU9xNsmlcAZ0DXWC/ipdp5XE86EA9F7fClWwCeZBnrXJQD7fXwwkTM4IqcADAAAAAElFTkSuQmCC") no-repeat 5px center;padding-left:40px; border-radius:3px; margin-bottom:5px; text-shadow:1px 1px 0px rgba(102,51,0,0.5); box-shadow:1px 1px 3px rgba(0,0,0,0.2);}
 .yunBox .text{line-height:24px;}
 .yunBox p strong:first-child{color:#F00;}
 .yunBox .zhubao .sxpro{float:right;width:140px;padding:24px 0 0 5px;}
